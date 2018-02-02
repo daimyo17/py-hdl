@@ -14,7 +14,7 @@ class board:
         pass
 
     def new_chip(self, coordX, coordY):
-        newChip = chip(self.tableHandler, coordX, coordY, coordX + self.relSize, coordY + self.relSize)
+        newChip = chip(self.tableHandler, coordX, coordY, coordX + self.relSize, coordY + self.relSize, self.relSize)
         self.drawnChips.append(newChip)
         pass
 
@@ -39,12 +39,19 @@ class board:
         (leftDownSide, rightDownSide) = (self.chip_exist(exChip.xUp, exChip.yDown + 15), self.chip_exist(exChip.xDown, exChip.yDown + 15))
 
         if (((upLeftSide != 0) or (downLeftSide != 0)) and (upLeftSide != exChip) and (downLeftSide != exChip) and (coordX < exChip.xUp)):
-            exChip.update(exChip.xUp , coordY, exChip.xDown, coordY + self.relSize)
+            exChip.update(exChip.xUp , coordY, exChip.xDown, coordY + exChip.relSize)
         elif (((upRightSide != 0) or (downRightSide != 0)) and (upRightSide != exChip) and (downRightSide != exChip) and (coordX > exChip.xUp)):
-            exChip.update(exChip.xUp , coordY, exChip.xDown, coordY + self.relSize)
+            exChip.update(exChip.xUp , coordY, exChip.xDown, coordY + exChip.relSize)
         elif (((leftUpSide != 0) or (rightUpSide != 0)) and (leftUpSide != exChip) and (downRightSide != exChip) and (coordY < exChip.yUp)):
-            exChip.update(coordX , exChip.yUp , coordX + self.relSize, exChip.yDown)
+            exChip.update(coordX , exChip.yUp , coordX + exChip.relSize, exChip.yDown)
         elif (((leftDownSide != 0) or (rightDownSide != 0)) and (leftDownSide != exChip) and (rightDownSide != exChip) and (coordY > exChip.yUp)):
-            exChip.update(coordX , exChip.yUp , coordX + self.relSize, exChip.yDown)
+            exChip.update(coordX , exChip.yUp , coordX + exChip.relSize, exChip.yDown)
         else:
-            exChip.update(coordX , coordY, coordX + self.relSize, coordY + self.relSize)
+            exChip.update(coordX , coordY, coordX + exChip.relSize, coordY + exChip.relSize)
+
+    def change_chip_size(self, exChip, relSize):
+        exChip.change_size(exChip.relSize + relSize)
+
+    def change_all_chip_sizes(self, relSize):
+        for exChip in self.drawnChips:
+            self.change_chip_size(exChip, relSize)
