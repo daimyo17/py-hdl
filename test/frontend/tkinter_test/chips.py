@@ -28,7 +28,7 @@ class chip:
         self.yDown = yDown
         pass
 
-    def change_size(size, relSize):
+    def change_size(self, relSize):
         self.relSize = relSize
-        self.update(self.xUp, self.yUp, self.xDown + self.relSize, self.yDown + self.relSize)
+        self.update(self.xUp, self.yUp, self.xUp + self.relSize, self.yUp + self.relSize)
         pass

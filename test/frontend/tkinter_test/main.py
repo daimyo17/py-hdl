@@ -22,5 +22,14 @@ while True:
             projectBoard.move_chip(exChip, boardEvents.xCursor - relCoordX, boardEvents.yCursor - relCoordY)
             projectBoard.update(hwnd, 0)
 
+    #Change chip size
+    if (boardEvents.wheelDelta != 0):
+        exChip = projectBoard.chip_exist(boardEvents.xCursor, boardEvents.yCursor)
+        if (exChip == 0):
+            projectBoard.change_all_chip_sizes(boardEvents.wheel_delta())
+        else:
+            projectBoard.change_chip_size(exChip, boardEvents.wheel_delta())
+        projectBoard.update(hwnd, 0)
+
     projectBoard.update(hwnd, 0)
 mainloop()

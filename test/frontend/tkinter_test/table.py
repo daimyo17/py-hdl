@@ -53,5 +53,6 @@ class board:
         exChip.change_size(exChip.relSize + relSize)
 
     def change_all_chip_sizes(self, relSize):
+        self.relSize = self.relSize + relSize
         for exChip in self.drawnChips:
             self.change_chip_size(exChip, relSize)
