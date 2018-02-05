@@ -2,6 +2,8 @@ from tkinter import *
 from chips import *
 import time
 
+portMap = {"left":{"in": 6, "out": 0}}
+
 class board:
     tableHandler = 0
     relSize = 100
@@ -14,7 +16,7 @@ class board:
         pass
 
     def new_chip(self, coordX, coordY):
-        newChip = chip(self.tableHandler, coordX, coordY, coordX + self.relSize, coordY + self.relSize, self.relSize)
+        newChip = chip(self.tableHandler, coordX, coordY, coordX + self.relSize, coordY + self.relSize, self.relSize, portMap)
         self.drawnChips.append(newChip)
         pass
 
